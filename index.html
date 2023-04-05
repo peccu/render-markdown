@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Markdown rendering with marked</title>
+  </head>
+  <body>
+    <span id="from"></span><a id="src"></a>
+    <div id="result">
+      Usage: input markdown URL below. You can add it into query parameter (
+      <span id="loc"></span>?https://.../path/to/md )
+      <input id="url" />
+      <button onclick="run()">fetch</button>
+      <div id="error"></div>
+    </div>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
