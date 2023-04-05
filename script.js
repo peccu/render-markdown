@@ -1,15 +1,22 @@
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/+esm";
 
-const a = document.getElementById("src")
-const loc = document.getElementById("loc")
-const input = document.getElementById("url")
-const result = document.getElementById("result")
-const error = document.getElementById("error")
+const from = document.getElementById("from");
+const a = document.getElementById("src");
+const loc = document.getElementById("loc");
+const input = document.getElementById("url");
+const result = document.getElementById("result");
+const error = document.getElementById("error");
 
-loc.innerText = location.origin + location.pathname
+loc.innerText = location.origin + location.pathname;
 window.run = () => {
-  const u = input.value
+  let u = input.value;
+  from.innerText = "From ";
   a.href = a.innerText = u;
+  if (u.match(/https:\/\/github\.com\/.+\.md$/)) {
+    u = u
+      .replace("github.com", "raw.githubusercontent.com")
+      .replace(/\/blob\//, "/");
+  }
   fetch(u)
     .then((response) => response.text())
     .then((data) => {
@@ -28,12 +35,6 @@ window.run = () => {
 };
 if (location.search) {
   let url = location.search.slice(1);
-
-  if (url.match(/https:\/\/github\.com\/.+\.md$/)) {
-    url = url
-      .replace("github.com", "raw.githubusercontent.com")
-      .replace(/\/blob\//, "/");
-  }
   input.value = url;
   run();
 }

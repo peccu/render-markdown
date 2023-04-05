@@ -10,11 +10,13 @@
     <title>Markdown rendering with marked</title>
   </head>
   <body>
-    <a id="src"></a>
+    <span id="from"></span><a id="src"></a>
     <div id="result">
-      Usage: input markdown URL below. You can add it into query parameter ( <span id="loc"></span>?https://.../path/to/md )
+      Usage: input markdown URL below. You can add it into query parameter (
+      <span id="loc"></span>?https://.../path/to/md )
       <input id="url" />
       <button onclick="run()">fetch</button>
+      <div id="error"></div>
     </div>
     <script src="script.js" type="module"></script>
   </body>
