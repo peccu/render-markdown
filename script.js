@@ -1,11 +1,19 @@
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/+esm";
 
+const a = document.getElementById("src")
+const loc = document.getElementById("loc")
+const input = document.getElementById("url")
+const result = document.getElementById("result")
+const error = document.getElementById("error")
+
+loc.innerText = location.origin + location.pathname
 window.run = () => {
-  const u = document.getElementById("url").value;
+  const u = input.value
+  a.href = a.innerText = u;
   fetch(u)
     .then((response) => response.text())
     .then((data) => {
-      document.body.innerHTML = marked(data);
+      result.innerHTML = marked(data);
       const token = marked
         .lexer(data)
         .filter((e) => e.type === "heading" && e.depth === 1);
@@ -14,18 +22,18 @@ window.run = () => {
       }
     })
     .catch((e) => {
-      document.getElementById("result").innerText = e.message;
+      error.innerText = e.message;
     });
+  return false;
 };
 if (location.search) {
   let url = location.search.slice(1);
-  const r = document.getElementById("url");
 
   if (url.match(/https:\/\/github\.com\/.+\.md$/)) {
     url = url
       .replace("github.com", "raw.githubusercontent.com")
       .replace(/\/blob\//, "/");
   }
-  r.value = url;
+  input.value = url;
   run();
 }
